@@ -1,0 +1,57 @@
+================================================================================================================================
+                                             📊Test Results📊
+================================================================================================================================
+🔷 Test Case test_first_auto.py::TestUnit::test_one 🔷:
+✔️PASSED✔️
+📄Test Description📄:
+Unit testing ( basic logic of comment posting works and returns success message )
+❎No Errors❎
+
+🔷 Test Case test_first_auto.py::TestUnit::test_two 🔷:
+❌FAILED❌
+📄Test Description📄:
+Unit testing ( testing the logic of login form )
+❗Errors List❗:
+      ⚠️ 1. Accessing admin panel even after entering wrong data to the login field, but password entered correctly
+
+🔷 Test Case test_first_auto.py::TestSanity::test_three 🔷:
+✔️PASSED✔️
+📄Test Description📄:
+Sanity testing ( quick checking that the homepage loads properly and as expected )
+❎No Errors❎
+
+🔷 Test Case test_first_auto.py::TestPerformance::test_four 🔷:
+✔️PASSED✔️
+📄Test Description📄:
+Performance testing ( checking the load time of different pages of the site )
+❎No Errors❎
+
+🔷 Test Case test_first_auto.py::TestSecurity::test_five 🔷:
+❌FAILED❌
+📄Test Description📄:
+Security testing ( trying to access admin panel by pressing "refresh" button and "back" button )
+❗Errors List❗:
+      ⚠️ 1. Still accessing admin panel even after refreshing the page
+      ⚠️ 2. Still accessing admin panel even after going back to the page
+
+🔷 Test Case test_first_auto.py::TestFunctional::test_six 🔷:
+✔️PASSED✔️
+📄Test Description📄:
+Functional testing ( adding new game )
+❎No Errors❎
+
+🔷 Test Case test_first_auto.py::TestPlace::test_twentytwo 🔷:
+✔️PASSED✔️
+📄Test Description📄:
+🔴 Not provided 🔴
+❎No Errors❎
+
+🔷 Test Case test_first_auto.py::TestRegression::test_ten 🔷:
+✔️PASSED✔️
+📄Test Description📄:
+Regression testing ( checking if all routes work and shown properly )
+❎No Errors❎
+
+================================================================================================================================
+                                             🚩All tests finished🚩
+================================================================================================================================

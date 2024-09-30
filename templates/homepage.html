@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage - Game Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            justify-items: center;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+
+        .game-item {
+            text-align: center;
+        }
+
+        .game-item img {
+            width: 240px;
+            height: 280px;
+            border-radius: 10px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .game-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .game-item h3 {
+            color: #ff6f00;
+            margin-top: 10px;
+        }
+
+        .home-button, .admin-button {
+        position: absolute;
+        top: 20px;
+        padding: 10px;
+        background-color: #ff6f00;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .home-button {
+        left: 20px;
+    }
+
+    .admin-button {
+        right: 20px;
+    }
+
+    .home-button:hover, .admin-button:hover {
+        background-color: #e65c00;
+    }
+    </style>
+</head>
+<body>
+<a href="{{ url_for('login') }}" class="admin-button">Admin</a>
+<a href="{{ url_for('index') }}" class="home-button">
+    <i class="fas fa-home"></i>
+</a>
+    <div class="game-grid">
+        {% for game in games %}
+            <div class="game-item">
+                <a href="{{ url_for('game_page', game_id=game['id']) }}">
+                    <img src="{{ url_for('static', filename='images/' + game['gamepicture']) }}" alt="{{ game['gamename'] }}">
+                    <h3>{{ game['gamename'] }}</h3>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

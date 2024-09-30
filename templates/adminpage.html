@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    .home-button, .admin-button {
+        position: absolute;
+        top: 20px;
+        padding: 10px;
+        background-color: #ff6f00;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .home-button {
+        left: 20px;
+    }
+
+    .admin-button {
+        right: 20px;
+    }
+
+    .home-button:hover, .admin-button:hover {
+        background-color: #e65c00;
+    }
+
+    #instructions-content {
+        display: none;
+        margin-top: 20px;
+        background-color: #333333;
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .toggle-button {
+        background-color: #ff6f00;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .toggle-button:hover {
+        background-color: #e65c00;
+    }
+</style>
+
+</head>
+<body>
+<a href="{{ url_for('index') }}" class="home-button">
+    <i class="fas fa-home"></i>
+</a>
+    <div class="container">
+        <h2>Admin Panel</h2>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+        <button class="toggle-button" onclick="toggleInstructions()">Instructions</button>
+        <div id="instructions-content">
+            <p><strong>Instructions:</strong> Leave the ID field empty when adding a new game. For updating or deleting, fill in the ID field and the fields you want to update (or just the ID for deletion). To delete the comment, select the comment ID from the list and click the Submit button.</p>
+        </div>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="action">Select Action:</label>
+            <select name="action" id="action">
+                <option value="add">Add Game</option>
+                <option value="update">Update Game</option>
+                <option value="delete">Delete Game</option>
+                <option value="delete_comment">Delete Comment</option>
+            </select>
+
+            <label for="id">Game ID:</label>
+            <input type="number" name="id" placeholder="Game ID">
+
+            <label for="commentid">Comment ID:</label>
+            <input type="number" name="commentid" placeholder="Comment ID">
+
+            <label for="gamename">Game Name:</label>
+            <input type="text" name="gamename" placeholder="Game Name">
+
+            <label for="description">Description:</label>
+            <textarea name="description" placeholder="Game Description"></textarea>
+
+            <label for="developer">Developer:</label>
+            <input type="text" name="developer" placeholder="Developer">
+
+            <label for="publisher">Publisher:</label>
+            <input type="text" name="publisher" placeholder="Publisher">
+
+            <label for="releasedate">Release Date:</label>
+            <input type="date" name="releasedate">
+
+            <label for="gamepicture">Game Picture:</label>
+            <input type="file" name="gamepicture" accept="image/*">
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <h3>Existing Games</h3>
+        <div class="game-grid">
+            {% for game in games %}
+                <div class="game-item">
+                    <a href="{{ url_for('game_page', game_id=game['id']) }}">
+                    {% if game['gamepicture'] %}
+                        <img src="{{ url_for('static', filename='images/' + game['gamepicture']) }}" alt="{{ game['gamename'] }}">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/default.jpg') }}" alt="No Image Available">
+                    {% endif %}
+                    <h4>{{ game['gamename'] }} (ID: {{ game['id'] }})</h4>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h3>Existing Comments</h3>
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.commentid }}: {{ comment.commentatorsname }} - {{ comment.comment }} - {{ comment.timestamp }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script>
+        function toggleInstructions() {
+            var instructions = document.getElementById('instructions-content');
+            if (instructions.style.display === 'none') {
+                instructions.style.display = 'block';
+            } else {
+                instructions.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var flash = document.querySelector('.flashes');
+            if (flash) {
+                setTimeout(function() {
+                    flash.style.transition = "opacity 0.5s ease";
+                    flash.style.opacity = '0';
+                    setTimeout(function() {
+                        flash.remove();
+                    }, 500);
+                }, 3000); // Disappears after 3 seconds
+            }
+        });
+    </script>
+</body>
+</html>

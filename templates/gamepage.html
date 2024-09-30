@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ game.gamename }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1b1b1b;
+            color: #f1f1f1;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .game-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 30px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+        }
+
+        .game-image {
+            width: 300px;
+            height: 400px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .game-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .game-info h1 {
+            font-size: 32px;
+            margin: 0;
+            color: #ff6f00;
+            text-align: center;
+        }
+
+        .game-info p {
+            margin: 5px 0;
+        }
+
+        .game-description {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #333333;
+            border-radius: 10px;
+            text-align: justify;
+            display: none; /* Hidden initially */
+        }
+
+        .radio-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .home-button, .admin-button {
+            position: absolute;
+            top: 20px;
+            padding: 10px;
+            background-color: #ff6f00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 20px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-button {
+            left: 20px;
+        }
+
+        .admin-button {
+            right: 20px;
+        }
+
+        .home-button:hover, .admin-button:hover {
+            background-color: #e65c00;
+        }
+    </style>
+</head>
+<body>
+<a href="{{ url_for('index') }}" class="home-button">
+    <i class="fas fa-home"></i>
+</a>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<div class="container">
+    <div class="game-container">
+        <img class="game-image" src="{{ url_for('static', filename='images/' + game.gamepicture) }}" alt="{{ game.gamename }}">
+        <div class="game-info">
+            <h1>{{ game.gamename }}</h1>
+            <div class="radio-buttons">
+                <label>
+                    <input type="radio" name="toggle" value="info" checked> Game Info
+                </label>
+                <label>
+                    <input type="radio" name="toggle" value="description"> Description
+                </label>
+            </div>
+            <div class="game-info-content">
+                <p><strong>Developer:</strong> {{ game.developer }}</p>
+                <p><strong>Publisher:</strong> {{ game.publisher }}</p>
+                <p><strong>Release Date:</strong> {{ game.releasedate }}</p>
+            </div>
+            <div class="game-description">
+                <p>{{ game.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h2>Comments</h2>
+        <ul>
+            {% for comment in game.comments %}
+                <li>
+                    <strong>{{ comment.commentatorsname }} ({{ comment.timestamp.strftime('%Y-%m-%d %H:%M') }}):</strong>
+                    <p>{{ comment.comment }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="add-comment">
+        <h2>Leave a Comment</h2>
+        <form action="{{ url_for('add_comment', game_id=game.id) }}" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var flash = document.querySelector('.flashes');
+        if (flash) {
+            setTimeout(function() {
+                flash.style.transition = "opacity 0.5s ease";
+                flash.style.opacity = '0';
+                setTimeout(function() {
+                    flash.remove();
+                }, 500);
+            }, 3000); // Disappears after 3 seconds
+        }
+
+        // Toggle between game info and description
+        var radios = document.querySelectorAll('input[name="toggle"]');
+        var gameInfo = document.querySelector('.game-info-content');
+        var gameDescription = document.querySelector('.game-description');
+
+        radios.forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (this.value === 'info') {
+                    gameInfo.style.display = 'block';
+                    gameDescription.style.display = 'none';
+                } else {
+                    gameInfo.style.display = 'none';
+                    gameDescription.style.display = 'block';
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
