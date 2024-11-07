@@ -148,9 +148,11 @@
         <ul>
             {% for comment in game.comments %}
                 <li>
-                    <strong>{{ comment.commentatorsname }} ({{ comment.timestamp.strftime('%Y-%m-%d %H:%M') }}):</strong>
-                    <p>{{ comment.comment }}</p>
-                </li>
+  <strong class="comment-name">{{ comment.commentatorsname }}</strong>
+  <span class="comment-time">({{ comment.timestamp.strftime('%Y-%m-%d %H:%M') }}):</span>
+  <p>{{ comment.comment }}</p>
+</li>
+
             {% endfor %}
         </ul>
     </div>

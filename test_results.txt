@@ -1,57 +1,236 @@
 ================================================================================================================================
-                                             📊Test Results📊
+                                            📊📊📊 Test Results 📊📊📊
 ================================================================================================================================
-🔷 Test Case test_first_auto.py::TestUnit::test_one 🔷:
-✔️PASSED✔️
-📄Test Description📄:
-Unit testing ( basic logic of comment posting works and returns success message )
-❎No Errors❎
 
-🔷 Test Case test_first_auto.py::TestUnit::test_two 🔷:
-❌FAILED❌
-📄Test Description📄:
-Unit testing ( testing the logic of login form )
-❗Errors List❗:
-      ⚠️ 1. Accessing admin panel even after entering wrong data to the login field, but password entered correctly
+                             1.💠💠💠TEST_FIRST_AUTO.PY::TESTUNIT::TEST_C_POSTING💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: At least one game is available on the homepage to post a comment(3.1).
+        (Verifies that a comment can be posted by a guest user, displaying a success message and listing the comment
+         under the game’s comments section)
+        references: 2.2, 3.2
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
 
-🔷 Test Case test_first_auto.py::TestSanity::test_three 🔷:
-✔️PASSED✔️
-📄Test Description📄:
-Sanity testing ( quick checking that the homepage loads properly and as expected )
-❎No Errors❎
 
-🔷 Test Case test_first_auto.py::TestPerformance::test_four 🔷:
-✔️PASSED✔️
-📄Test Description📄:
-Performance testing ( checking the load time of different pages of the site )
-❎No Errors❎
+                             2.💠💠💠TEST_FIRST_AUTO.PY::TESTUNIT::TEST_C_POSTING_TIME💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: At least one game is available on the homepage to post a comment(3.1).
+        (Verifies that a comment's posting time displays correctly and matches the current time in UTC format)
+        references: 2.2, 3.2
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
 
-🔷 Test Case test_first_auto.py::TestSecurity::test_five 🔷:
-❌FAILED❌
-📄Test Description📄:
-Security testing ( trying to access admin panel by pressing "refresh" button and "back" button )
-❗Errors List❗:
-      ⚠️ 1. Still accessing admin panel even after refreshing the page
-      ⚠️ 2. Still accessing admin panel even after going back to the page
 
-🔷 Test Case test_first_auto.py::TestFunctional::test_six 🔷:
-✔️PASSED✔️
-📄Test Description📄:
-Functional testing ( adding new game )
-❎No Errors❎
+                             3.💠💠💠TEST_FIRST_AUTO.PY::TESTSANITY::TEST_HP_SANITY💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: 8 games are in a database as expected.
+        (Quick check that the homepage loads properly and has 8 games as expected)
+        references: 2.1, 3.1
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
 
-🔷 Test Case test_first_auto.py::TestPlace::test_twentytwo 🔷:
-✔️PASSED✔️
-📄Test Description📄:
-🔴 Not provided 🔴
-❎No Errors❎
 
-🔷 Test Case test_first_auto.py::TestRegression::test_ten 🔷:
-✔️PASSED✔️
-📄Test Description📄:
-Regression testing ( checking if all routes work and shown properly )
-❎No Errors❎
+                             4.💠💠💠TEST_FIRST_AUTO.PY::TESTSMOKE::TEST_SMOKE_NAVIGATION💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: 8 games are in a database as expected.
+        (Quick validation of main site functionalities including navigation and key elements)
+        references: 2.1, 2.2, 2.3, 2.4
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             5.💠💠💠TEST_FIRST_AUTO.PY::TESTNONFUNCTIONAL::TEST_P_LOADTIME💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Site routes (home, game page, login, admin) must be predefined and accessible.
+        (check different site pages load time)
+        references: 2.1, 2.2, 2.3, 2.4
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             6.💠💠💠TEST_FIRST_AUTO.PY::TESTSECURITY::TEST_BACK_REFRESH💠💠💠:
+❌ ❌ ❌ FAILED ❌ ❌ ❌
+        📄📄📄
+        Test case Description:
+        preconditions: Access to an admin panel.
+        (Validate that refreshing or navigating back does not grant unauthorized access to the admin panel)
+        references: 2.3, 2.4
+        📄📄📄
+❗ ❗ ❗ ERRORS LIST ❗ ❗ ❗:
+        ⚠️⚠️⚠️ 1. Still accessing admin panel even after refreshing the page ⚠️⚠️⚠️
+        ⚠️⚠️⚠️ 2. Still accessing admin panel even after going back to the page ⚠️⚠️⚠️
+        ⚠️⚠️⚠️ 3. Still accessing admin panel even after leaving it previously ⚠️⚠️⚠️
+
+
+                             7.💠💠💠TEST_FIRST_AUTO.PY::TESTSECURITY::TEST_LOGIN_FORM_LOGIC💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Access to an admin panel.
+        (Testing login form logic for various input scenarios)
+        references: 2.3
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             8.💠💠💠TEST_FIRST_AUTO.PY::TESTUI::TEST_UI_HP💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: no.
+        (Testing the UI side of the homepage)
+        references: 2.1, 3.1
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             9.💠💠💠TEST_FIRST_AUTO.PY::TESTUI::TEST_UI_GP💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: no.
+        (Checking the UI side of game page 1)
+        references: 2.2, 3.2
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             10.💠💠💠TEST_FIRST_AUTO.PY::TESTUI::TEST_UI_LP💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: no.
+        (Checking the UI side of login page)
+        references: 2.3
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             11.💠💠💠TEST_FIRST_AUTO.PY::TESTUI::TEST_UI_AP💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: no.
+        (Checking the UI side of admin page)
+        references: 2.4
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             12.💠💠💠TEST_FIRST_AUTO.PY::TESTNEGATIVE::TEST_C_POSTING_NEG_EMPTY_FIELDS💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Comment form should not accept submissions with empty name or comment fields.
+        (Attempting to post a comment with either the name or comment field left empty)
+        references: 3.2
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             13.💠💠💠TEST_FIRST_AUTO.PY::TESTNEGATIVE::TEST_C_POSTING_NEG_INVALID_VALUES💠💠💠:
+❌ ❌ ❌ FAILED ❌ ❌ ❌
+        📄📄📄
+        Test case Description:
+        preconditions: Comment form should restrict inputs exceeding the max field length.
+        (Attempting to post comment with higher field length limits)
+        references: 3.2
+        📄📄📄
+❗ ❗ ❗ ERRORS LIST ❗ ❗ ❗:
+        ⚠️⚠️⚠️ 1. The success message was displayed even though the name field exceeded the allowed length ⚠️⚠️⚠️
+        ⚠️⚠️⚠️ 2. A comment appeared on the page despite exceeding the allowed name field length ⚠️⚠️⚠️
+        ⚠️⚠️⚠️ 3. The success message was displayed even though the comment field exceeded the allowed length ⚠️⚠️⚠️
+        ⚠️⚠️⚠️ 4. A comment appeared on the page despite exceeding the allowed comment field length ⚠️⚠️⚠️
+
+
+                             14.💠💠💠TEST_FIRST_AUTO.PY::TESTNEGATIVE::TEST_D_C_NEG💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Admin panel should properly display error messages for invalid or empty field submissions.
+        (Testing deleting comment function under negative scenarios)
+        references: 2.4.4
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             15.💠💠💠TEST_FIRST_AUTO.PY::TESTNEGATIVE::TEST_A_G_NEG💠💠💠:
+❌ ❌ ❌ FAILED ❌ ❌ ❌
+        📄📄📄
+        Test case Description:
+        preconditions: Access to an admin panel.
+        (Attempting to add a game while leaving mandatory fields empty or exceeding field length limits)
+        references: 2.4.5
+        📄📄📄
+❗ ❗ ❗ ERRORS LIST ❗ ❗ ❗:
+        ⚠️⚠️⚠️ 1. Game was added despite field length exceeding limits ⚠️⚠️⚠️
+
+
+                             16.💠💠💠TEST_FIRST_AUTO.PY::TESTINTEGRATION::TEST_ROUTES_CHECKING💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Site routes (home, game page, login, admin) must be predefined and accessible.
+        (Verifying that all main routes are accessible and show the correct content)
+        references: 2.1, 2.2, 2.3, 2.4
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             17.💠💠💠TEST_FIRST_AUTO.PY::TESTINTEGRATION::TEST_A_G_A_C_D_G💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Access to an admin panel.
+        (Adding a new game to the database, comment on it, and then delete the game to verify that
+        associated comments are also removed)
+        references: 2.4.1, 2.4.3, 3.2
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             18.💠💠💠TEST_FIRST_AUTO.PY::TESTINTEGRATION::TEST_ACCEPTANCE💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Access to an admin panel.
+        (Verifying that main site functionality meets customer requirements and basic features work correctly)
+        references: 2.4, 2.2, 3.2
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             19.💠💠💠TEST_FIRST_AUTO.PY::TESTFUNCTIONAL::TEST_AUD_G💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: Access to an admin panel.
+        (Verifying adding, updating, and deleting a game in the admin panel)
+        references: 2.4.1, 2.4.2, 2.4.3, 2.4.5
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
+
+
+                             20.💠💠💠TEST_FIRST_AUTO.PY::TESTFUNCTIONAL::TEST_D_C💠💠💠:
+✔️ ✔️ ✔️ PASSED ✔️ ✔️ ✔️
+        📄📄📄
+        Test case Description:
+        preconditions: 1. At least one comment should exist in the database. 2. Access to an admin panel.
+        (Deleting all existing comments from the admin panel)
+        references: 2.4.6
+        📄📄📄
+🟢 🟢 🟢 NO ERRORS 🟢 🟢 🟢
 
 ================================================================================================================================
-                                             🚩All tests finished🚩
+                                          🚩🚩🚩 All tests finished 🚩🚩🚩
 ================================================================================================================================

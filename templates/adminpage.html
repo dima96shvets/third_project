@@ -96,17 +96,17 @@
             <label for="commentid">Comment ID:</label>
             <input type="number" name="commentid" placeholder="Comment ID">
 
-            <label for="gamename">Game Name:</label>
-            <input type="text" name="gamename" placeholder="Game Name">
+            <label for="gamename">Game Name (max 100 characters):</label>
+            <input type="text" name="gamename" placeholder="Game Name" maxlength="100">
 
-            <label for="description">Description:</label>
-            <textarea name="description" placeholder="Game Description"></textarea>
+            <label for="description">Description (max 800 characters):</label>
+            <textarea name="description" placeholder="Game Description" maxlength="800"></textarea>
 
-            <label for="developer">Developer:</label>
-            <input type="text" name="developer" placeholder="Developer">
+            <label for="developer">Developer (max 100 characters):</label>
+            <input type="text" name="developer" placeholder="Developer" maxlength="100">
 
-            <label for="publisher">Publisher:</label>
-            <input type="text" name="publisher" placeholder="Publisher">
+            <label for="publisher">Publisher (max 100 characters):</label>
+            <input type="text" name="publisher" placeholder="Publisher" maxlength="100">
 
             <label for="releasedate">Release Date:</label>
             <input type="date" name="releasedate">
@@ -140,28 +140,25 @@
             {% endfor %}
         </ul>
     </div>
-    <script>
-        function toggleInstructions() {
-            var instructions = document.getElementById('instructions-content');
+   <script>
+    // Ensure that the instructions content is hidden when the page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        const instructions = document.getElementById('instructions-content');
+        const toggleButton = document.querySelector('.toggle-button');
+
+        // Initially hide the instructions
+        instructions.style.display = 'none';
+
+        // Add event listener to the toggle button
+        toggleButton.addEventListener('click', function () {
+            // Toggle the display style of the instructions
             if (instructions.style.display === 'none') {
                 instructions.style.display = 'block';
             } else {
                 instructions.style.display = 'none';
             }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var flash = document.querySelector('.flashes');
-            if (flash) {
-                setTimeout(function() {
-                    flash.style.transition = "opacity 0.5s ease";
-                    flash.style.opacity = '0';
-                    setTimeout(function() {
-                        flash.remove();
-                    }, 500);
-                }, 3000); // Disappears after 3 seconds
-            }
         });
-    </script>
+    });
+</script>
 </body>
 </html>

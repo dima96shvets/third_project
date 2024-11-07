@@ -23,14 +23,15 @@ class Game(db.Model):
     publisher = db.Column(db.String(100), nullable=False)
     releasedate = db.Column(db.String(100), nullable=False)
 
+    comments = db.relationship('Comments', backref='game', cascade="all, delete-orphan", lazy=True)
+
 
 class Comments(db.Model):
     commentid = db.Column(db.Integer, primary_key=True)
     commentatorsname = db.Column(db.String(80), nullable=False)
     comment = db.Column(db.String(800), nullable=False)
     game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
-    timestamp = db.Column(db.DateTime, default=lambda: datetime.now(pytz.timezone('Etc/GMT-3')), nullable=False)
-    game = db.relationship('Game', backref=db.backref('comments', lazy=True))
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
 
 @app.route('/')
@@ -100,6 +101,10 @@ def admin():
                 flash('All fields must be filled out, except id when adding a new game.', 'error')
                 return redirect(url_for('admin'))
 
+            if len(gamename) > 100 or len(description) > 800 or len(developer) > 100 or len(publisher) > 100:
+                flash('Field lengths exceed the allowed limit', 'error')
+                return redirect(url_for('admin'))
+
             if 'gamepicture' in request.files and request.files['gamepicture'].filename != '':
                 file = request.files['gamepicture']
                 filename = file.filename
@@ -132,6 +137,10 @@ def admin():
             publisher = request.form.get('publisher')
             releasedate = request.form.get('releasedate')
 
+            if len(gamename) > 100 or len(description) > 800 or len(developer) > 100 or len(publisher) > 100:
+                flash('Field lengths exceed the allowed limit', 'error')
+                return redirect(url_for('admin'))
+
             if gamename:
                 game.gamename = gamename
             if description:
@@ -156,7 +165,6 @@ def admin():
             db.session.commit()
             flash(f'Game with ID {game_id} updated successfully!', 'success')
             return redirect(url_for('admin'))
-            pass
 
         elif action == 'delete':
             game_id = request.form.get('id')
@@ -172,7 +180,6 @@ def admin():
             else:
                 flash(f'No game found with ID {game_id}', 'error')
             return redirect(url_for('admin'))
-            pass
 
         elif action == 'delete_comment':
             comment_id = request.form.get('commentid')
