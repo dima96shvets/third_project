@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session, flash, send_from_directory
 import pytz
 import os
-import emoji
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from datetime import datetime
